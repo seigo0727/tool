@@ -1,4 +1,6 @@
 <?php
+# TOOL定数
+require_once __DIR__ . '/../app/constants.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,15 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+# env切り替え
+(function($app) {
+    $argvInput = new \Symfony\Component\Console\Input\ArgvInput();
+    if($app->runningInConsole() && $argvInput->hasParameterOption('--env')){
+        $app->loadEnvironmentFrom('.env.' . $argvInput->getParameterOption('--env'));
+    } else {
+        require_once __DIR__ . '/../setting/env_setting.php';
+    }
+})($app);
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

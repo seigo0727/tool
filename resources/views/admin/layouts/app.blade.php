@@ -44,6 +44,7 @@
 </body>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
     var sidemenuToggle = document.getElementById('toggle');
     // メインコンテンツを囲むmain要素
     var page = document.getElementsByTagName('main')[0];
@@ -59,8 +60,34 @@ document.addEventListener('DOMContentLoaded', function() {
             page.style.cssText = 'margin-left: 0px'
             sidemenuStatus = true;
         }
-    })
+    });
+
+    // デバッグバーの高さ取得
+    var debugbarHeight = getDebugbarHeight();
+
+    // 初期設定でコンテンツ要素の上の余白を設定
+    adjustContentMargin(debugbarHeight);
+
+    // ウィンドウサイズが変更されたときにデバッグバーの高さを再取得し、コンテンツの高さを調整
+    window.addEventListener('resize', function () {
+        debugbarHeight = getDebugbarHeight();
+        adjustContentMargin(debugbarHeight);
+    });
 });
+
+// デバッグバーの高さを取得する関数
+function getDebugbarHeight() {
+        var debugbar = document.querySelector('.phpdebugbar');
+        return debugbar ? debugbar.offsetHeight : 0;
+    }
+
+// コンテンツの上の余白を調整する関数
+function adjustContentMargin(debugbarHeight) {
+    var contentElement = document.querySelector('.content');
+    if (contentElement) {
+        contentElement.style.marginTop = debugbarHeight + 'px';
+    }
+}
 </script>
 @yield('after_script')
 </html>

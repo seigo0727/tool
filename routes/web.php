@@ -37,8 +37,15 @@ Route::prefix('admin')
                     Route::prefix('command')
                     ->name('command.')
                     ->group(function() {
-                        Route::get('/', [App\Http\Controllers\Admin\Masetr\Development\CommandController::class, 'index'])->name('index');
-                        Route::get('/execute', [App\Http\Controllers\Admin\Masetr\Development\CommandController::class, 'execute'])->name('execute');
+                        Route::get('/', [App\Http\Controllers\Admin\Master\Development\CommandController::class, 'index'])->name('index');
+                        Route::get('/execute', [App\Http\Controllers\Admin\Master\Development\CommandController::class, 'execute'])->name('execute');
+                    });
+                    # phpinfo
+                    Route::prefix('phpinfo')
+                    ->name('phpinfo.')
+                    ->group(function() {
+                        Route::get('/', [App\Http\Controllers\Admin\Master\Development\PhpinfoController::class, 'index'])->name('index');
+                        Route::get('/info', [App\Http\Controllers\Admin\Master\Development\PhpinfoController::class, 'info'])->name('info');
                     });
                 });
 
