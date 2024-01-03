@@ -1,0 +1,20 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// SideBar
+@import 'sidebar';
+
+
+header{
+    height: 50px;
+}
+
+main {
+    transition: 0.3s all ease;
+}
